@@ -1,6 +1,7 @@
 package br.edu.ifsul.cc.lpoo.om.model;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class Servico {
     private Integer id;
@@ -11,7 +12,8 @@ public class Servico {
     private  StatusServico statusServico;
     private Orcamento orcamento;
     private Equipe equipe;
-    private Pagamento pagamento;
+
+    private List<Pagamento> pagamentos;
 
     public Integer getId() {
         return id;
@@ -69,11 +71,11 @@ public class Servico {
         this.equipe = equipe;
     }
 
-    public Pagamento getPagamento() {
-        return pagamento;
+    public List<Pagamento> getPagamentos() {
+        return pagamentos;
     }
 
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
+    public void setPagamentos(List<Pagamento> pagamentos) {
+        this.pagamentos = pagamentos;
     }
 }
