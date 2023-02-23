@@ -1,18 +1,36 @@
 package br.edu.ifsul.cc.lpoo.om.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
-
-public class Servico {
+@Entity
+@Table(name = "tb_servico")
+public class Servico  implements Serializable {
+    @Id
+    @SequenceGenerator(name = "seq_servico", sequenceName = "seq_servico_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_servico", strategy = GenerationType.SEQUENCE)
     private Integer id;
+    @Column(nullable = false)
     private Float valor;
+    @Column(nullable = true)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar data_inicio;
+    @Column(nullable = true)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar data_fim;
-
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private  StatusServico statusServico;
+    @Column(nullable = true)
+    @ManyToOne
     private Orcamento orcamento;
+    @Column(nullable = true)
+    @ManyToOne
     private Equipe equipe;
 
+    @OneToMany(mappedBy = "servico") //mappedBy deve apontar para a referencia de pagamento dentro do Servico.
     private List<Pagamento> pagamentos;
 
     public Integer getId() {

@@ -1,11 +1,22 @@
 package br.edu.ifsul.cc.lpoo.om.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Calendar;
-
-public class Curso {
+@Entity
+@Table(name = "tb_curso")
+public class Curso  implements Serializable {
+    @Id
+    @SequenceGenerator(name = "seq_curso", sequenceName = "seq_curso_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_curso", strategy = GenerationType.SEQUENCE)
     private Integer Id;
+    @Column(nullable = false)
     private String descricao;
+
+    @Column(nullable = true)
+    @Temporal(TemporalType.TIMESTAMP)
     private Calendar dt_conclusão;
+    @Column(nullable = true)
     private Integer cargaHoraria;
 
     public Curso() {

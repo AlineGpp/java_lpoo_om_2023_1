@@ -1,19 +1,35 @@
 package br.edu.ifsul.cc.lpoo.om.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
-
-public class Orcamento {
+@Entity
+@Table(name = "tb_orcamento")
+public class Orcamento implements Serializable {
+    @Id
+    @SequenceGenerator(name = "seq_orcamento", sequenceName = "seq_orcamento_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_orcamento", strategy = GenerationType.SEQUENCE)
     private Integer id;
+    @Column(nullable = false)
     private String observacoes;
+    @Column(nullable = false)
     private Calendar data;
-
-    private MaoObra maoObra;
+    @Column(nullable = false)
+    @ManyToOne
     private Cliente cliente;
-    private Funcionario funcionario;
-
-    private List<Veiculo> veiculos;
+   @ManyToMany
+   @JoinColumn(name = "veiculo_placa", nullable = false)
+   @ManyToOne
+    private Veiculo veiculo;
+    @ManyToMany // N p/ N
+    @JoinTable(name = "tb_orcamento_pecas", joinColumns = {@JoinColumn(name = "orcamento_id")}, //agregacao, vai gerar uma tabela associativa.
+            inverseJoinColumns = {@JoinColumn(name = "pecas_id")})
     private List<Peca> pecas;
+    @ManyToMany // N p/ N
+    @JoinTable(name = "tb_orcamento_maoObra", joinColumns = {@JoinColumn(name = "orcamento_id")}, //agregacao, vai gerar uma tabela associativa.
+            inverseJoinColumns = {@JoinColumn(name = "maoObra_id")})
+    private List<MaoObra> maoObra;
 
 
     public Orcamento() {
@@ -43,13 +59,6 @@ public class Orcamento {
         this.data = data;
     }
 
-    public MaoObra getMaoObra() {
-        return maoObra;
-    }
-
-    public void setMaoObra(MaoObra maoObra) {
-        this.maoObra = maoObra;
-    }
 
     public Cliente getCliente() {
         return cliente;
@@ -59,21 +68,6 @@ public class Orcamento {
         this.cliente = cliente;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
-
-    public List<Veiculo> getVeiculos() {
-        return veiculos;
-    }
-
-    public void setVeiculos(List<Veiculo> veiculos) {
-        this.veiculos = veiculos;
-    }
 
     public List<Peca> getPecas() {
         return pecas;
@@ -81,5 +75,21 @@ public class Orcamento {
 
     public void setPecas(List<Peca> pecas) {
         this.pecas = pecas;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public List<MaoObra> getMaoObra() {
+        return maoObra;
+    }
+
+    public void setMaoObra(List<MaoObra> maoObra) {
+        this.maoObra = maoObra;
     }
 }

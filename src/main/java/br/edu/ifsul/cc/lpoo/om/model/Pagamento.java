@@ -1,15 +1,31 @@
 package br.edu.ifsul.cc.lpoo.om.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Pagamento {
+@Entity
+@Table(name = "tb_pagamento")
+public class Pagamento  implements Serializable {
+    @Id
+    @SequenceGenerator(name = "seq_pagamento", sequenceName = "seq_pagamento_id", allocationSize = 1)
+    @GeneratedValue(generator = "seq_pagamento", strategy = GenerationType.SEQUENCE)
     private Integer id;
-    private Integer numero_parcela;
-    private Calendar data_vencimento;
-    private Calendar data_pagamento;
-    private Float valor;
 
-    private Servico servico;
+    @Column(nullable = false)
+    private Integer numero_parcela;
+    @Column(nullable = false)
+    private Calendar data_vencimento;
+    @Column(nullable = false)
+    private Calendar data_pagamento;
+    @Column(nullable = false)
+    private Float valor;
+    @ManyToOne
+    @JoinColumn(name = "servico_id", nullable = false)
+    private Servico servico;//agregacao por composic
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private FormaPagamento formaPagamento;
 
     public Pagamento() {
