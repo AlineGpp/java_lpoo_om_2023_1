@@ -2,9 +2,12 @@
 package br.edu.ifsul.cc.lpoo.om.model.dao;
 
 import br.edu.ifsul.cc.lpoo.om.model.Funcionario;
+import br.edu.ifsul.cc.lpoo.om.model.Peca;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import java.util.List;
 
 
 public class PersistenciaJPA implements InterfacePersistencia{
@@ -34,22 +37,43 @@ public class PersistenciaJPA implements InterfacePersistencia{
 
     @Override
     public Object find(Class c, Object id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return entity.find(c, id); //encontra um determinado registro
     }
 
     @Override
     public void persist(Object o) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        entity.getTransaction().begin();//abir a transação
+        entity.persist(o);//realiza o insert ou update
+        entity.getTransaction().commit();//comita a transaçaõ (comando sql)
     }
 
     @Override
     public void remover(Object o) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        entity.getTransaction().begin();//abir a transação
+        entity.remove(o);//realiza o delete
+        entity.getTransaction().commit();//comita a transaçaõ (comando sql)
     }
+
+
+    @Override
+    public List<Peca> listPeca() throws Exception {
+
+        return entity.createNamedQuery("Peca.orderbynome").getResultList();
+    }
+
+    @Override
+    public List<Funcionario> listaFuncionario() throws Exception {
+        return entity.createNamedQuery("Funcionario.orderbynome").getResultList();
+    }
+
 
     @Override
     public Funcionario doLogin(String cpf, String senha) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+
+
+
+
 }

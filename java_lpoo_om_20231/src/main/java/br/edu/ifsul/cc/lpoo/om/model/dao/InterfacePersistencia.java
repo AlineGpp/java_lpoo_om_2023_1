@@ -2,6 +2,9 @@
 package br.edu.ifsul.cc.lpoo.om.model.dao;
 
 import br.edu.ifsul.cc.lpoo.om.model.Funcionario;
+import br.edu.ifsul.cc.lpoo.om.model.Peca;
+
+import java.util.List;
 
 
 public interface InterfacePersistencia {
@@ -17,4 +20,8 @@ public interface InterfacePersistencia {
     public void remover(Object o) throws Exception;//delete.
     
     public Funcionario doLogin(String cpf, String senha) throws Exception;
+
+    public List<Peca> listPeca() throws Exception;
+
+    public List<Funcionario> listaFuncionario() throws Exception;
 }

@@ -35,6 +35,16 @@ public class Curso {
         
     }
 
+    @Override
+    public String toString() {
+        return "Curso{" +
+                "id=" + id +
+                ", descricao='" + descricao + '\'' +
+                ", dt_conclusao=" + dt_conclusao +
+                ", cargahoraria=" + cargahoraria +
+                '}';
+    }
+
     /**
      * @return the id
      */

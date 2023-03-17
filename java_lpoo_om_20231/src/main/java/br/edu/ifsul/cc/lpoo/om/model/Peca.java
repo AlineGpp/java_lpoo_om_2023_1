@@ -1,20 +1,12 @@
 
 package br.edu.ifsul.cc.lpoo.om.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 
 
 @Entity
 @Table(name = "tb_peca")
+@NamedQueries({@NamedQuery(name="Peca.orderbynome", query="select p from Peca p order by p.nome asc")})
 public class Peca {
     
     @Id
@@ -33,6 +25,16 @@ public class Peca {
     
     public Peca(){
         
+    }
+
+    @Override
+    public String toString() {
+        return "Peca{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", valor=" + valor +
+                ", fornecedor='" + fornecedor + '\'' +
+                '}';
     }
 
     /**
@@ -90,6 +92,8 @@ public class Peca {
     public void setFornecedor(String fornecedor) {
         this.fornecedor = fornecedor;
     }
+
+
     
     
 }

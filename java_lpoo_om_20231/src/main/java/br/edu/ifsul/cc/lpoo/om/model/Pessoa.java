@@ -47,6 +47,14 @@ public abstract class Pessoa implements Serializable{
         
     }
 
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
     /**
      * @return the cpf
      */
