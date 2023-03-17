@@ -169,7 +169,7 @@ public class TestPersistenceJPA {
 
             if ((lista.size() > 0)) {
                 for (Funcionario funcionario : lista) {
-                    System.out.println(funcionario);
+                    System.out.println(funcionario.getCursos());
                     persistencia.remover(funcionario);
                 }
             } else {
