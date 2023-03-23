@@ -2,11 +2,11 @@
 package br.edu.ifsul.cc.lpoo.om.model;
 
 import javax.persistence.*;
-
+///hql
 
 @Entity
 @Table(name = "tb_peca")
-@NamedQueries({@NamedQuery(name="Peca.orderbynome", query="select p from Peca p order by p.nome asc")})
+@NamedQueries({@NamedQuery(name="Peca.orderbyid", query="select p from Peca p order by p.id asc")})
 public class Peca {
     
     @Id

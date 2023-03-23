@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+//como resolver o problema de o id ser uma constante pode ser eoslvido com listas
+//teste circukar
+
 public class TestPersistenceJPA {
 
     @Test
@@ -162,7 +165,6 @@ public class TestPersistenceJPA {
     public void testListaFuncionarios() throws Exception {
 
         PersistenciaJPA persistencia = new PersistenciaJPA();
-
         if (persistencia.conexaoAberta()) {
             System.out.println("abriu a conexao com o BD via JPA");
             List<Funcionario> lista = persistencia.listaFuncionario();

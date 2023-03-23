@@ -1,6 +1,8 @@
 
 package br.edu.ifsul.cc.lpoo.om.model.dao;
 
+import br.edu.ifsul.cc.lpoo.om.model.Cargo;
+import br.edu.ifsul.cc.lpoo.om.model.Curso;
 import br.edu.ifsul.cc.lpoo.om.model.Funcionario;
 import br.edu.ifsul.cc.lpoo.om.model.Peca;
 
@@ -24,4 +26,9 @@ public interface InterfacePersistencia {
     public List<Peca> listPeca() throws Exception;
 
     public List<Funcionario> listaFuncionario() throws Exception;
+
+    public List<Curso> listaDeCursos() throws Exception;
+
+    public List<Cargo> listaCargos() throws Exception;
 }
+

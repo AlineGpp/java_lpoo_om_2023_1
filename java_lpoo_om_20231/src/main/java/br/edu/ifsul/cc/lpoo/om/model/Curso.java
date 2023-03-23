@@ -2,18 +2,11 @@
 package br.edu.ifsul.cc.lpoo.om.model;
 
 import java.util.Calendar;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_curso")
+@NamedQueries({@NamedQuery(name="Curso.orderbyid", query="select c from Curso c order by c.id asc")})
 public class Curso {
     
     @Id

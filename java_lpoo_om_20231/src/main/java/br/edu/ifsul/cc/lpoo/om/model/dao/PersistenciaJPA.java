@@ -1,6 +1,8 @@
 
 package br.edu.ifsul.cc.lpoo.om.model.dao;
 
+import br.edu.ifsul.cc.lpoo.om.model.Cargo;
+import br.edu.ifsul.cc.lpoo.om.model.Curso;
 import br.edu.ifsul.cc.lpoo.om.model.Funcionario;
 import br.edu.ifsul.cc.lpoo.om.model.Peca;
 
@@ -58,7 +60,7 @@ public class PersistenciaJPA implements InterfacePersistencia{
     @Override
     public List<Peca> listPeca() throws Exception {
 
-        return entity.createNamedQuery("Peca.orderbynome").getResultList();
+        return entity.createNamedQuery("Peca.orderbyid").getResultList();
     }
 
     @Override
@@ -66,6 +68,15 @@ public class PersistenciaJPA implements InterfacePersistencia{
         return entity.createNamedQuery("Funcionario.orderbynome").getResultList();
     }
 
+    @Override
+    public List<Curso> listaDeCursos() throws Exception {
+        return entity.createNamedQuery("Curso.orderbyid").getResultList();
+    }
+
+    @Override
+    public List<Cargo> listaCargos() throws Exception {
+        return entity.createNamedQuery("Cargo.orderbyid").getResultList();
+    }
 
     @Override
     public Funcionario doLogin(String cpf, String senha) throws Exception {
