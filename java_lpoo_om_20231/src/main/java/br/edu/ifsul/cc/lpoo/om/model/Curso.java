@@ -18,10 +18,6 @@ public class Curso {
     private String descricao;
     
     @Column(nullable = true)
-    @Temporal(TemporalType.DATE) 
-    private Calendar dt_conclusao;
-    
-    @Column(nullable = true)
     private Integer cargahoraria;
     
     public Curso(){
@@ -32,8 +28,7 @@ public class Curso {
     public String toString() {
         return "Curso{" +
                 "id=" + id +
-                ", descricao='" + descricao + '\'' +
-                ", dt_conclusao=" + dt_conclusao +
+                ", descricao='" + descricao  +
                 ", cargahoraria=" + cargahoraria +
                 '}';
     }
@@ -64,20 +59,6 @@ public class Curso {
      */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    /**
-     * @return the dt_conclusao
-     */
-    public Calendar getDt_conclusao() {
-        return dt_conclusao;
-    }
-
-    /**
-     * @param dt_conclusao the dt_conclusao to set
-     */
-    public void setDt_conclusao(Calendar dt_conclusao) {
-        this.dt_conclusao = dt_conclusao;
     }
 
     /**
