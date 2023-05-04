@@ -1,10 +1,7 @@
 
 package br.edu.ifsul.cc.lpoo.om.model.dao;
 
-import br.edu.ifsul.cc.lpoo.om.model.Cargo;
-import br.edu.ifsul.cc.lpoo.om.model.Curso;
-import br.edu.ifsul.cc.lpoo.om.model.Funcionario;
-import br.edu.ifsul.cc.lpoo.om.model.Peca;
+import br.edu.ifsul.cc.lpoo.om.model.*;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityManager;
@@ -83,8 +80,41 @@ public class PersistenciaJPA implements InterfacePersistencia{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public List<Cliente> listaClientes() throws Exception {
+        return entity.createNamedQuery("Cliente.orderbycpf").getResultList();
+    }
+
+    @Override
+    public List<Equipe> listaEquipe() throws Exception {
+        return entity.createNamedQuery("Equipe.orderbyid").getResultList();
+    }
+
+    @Override
+    public List<MaoObra> listaMaoObra() throws Exception {
+        return entity.createNamedQuery("MaoObra.orderbyid").getResultList();
+    }
+
+    @Override
+    public List<Orcamento> listaOrcamento() throws Exception {
+        return entity.createNamedQuery("Orcamento.orderbyid").getResultList();
+    }
+
+    @Override
+    public List<Servico> listaOrdemServico() throws Exception{
+        return entity.createNamedQuery("Servico.orderbyid").getResultList();
+    }
 
 
+   @Override
+    public List<Veiculo> listaVeiculo() throws Exception {
+        return entity.createNamedQuery("Veiculo.orderbyid").getResultList();
+    }
+
+    @Override
+    public List<Pagamento> listaPagamento() throws Exception {
+        return entity.createNamedQuery("Pagamento.orderbyid").getResultList();
+    }
 
 
 }

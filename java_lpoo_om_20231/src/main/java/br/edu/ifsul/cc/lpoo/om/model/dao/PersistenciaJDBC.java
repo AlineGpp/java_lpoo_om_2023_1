@@ -60,7 +60,7 @@ public class PersistenciaJDBC implements InterfacePersistencia {
 
             PreparedStatement ps = this.con.prepareStatement("select " +
                     "id, " +
-                    "descicao " +
+                    "descricao " +
                     "from tb_cargo " +
                     "where id = ? ");
 
@@ -211,6 +211,7 @@ public class PersistenciaJDBC implements InterfacePersistencia {
 
             PreparedStatement ps = this.con.prepareStatement("SELECT data_admissao, data_demissao, numero_ctps, cpf, cargo_id FROM tb_funcionario  WHERE cpf = ?");
 
+            ps.setString(1,id.toString());
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()){
@@ -219,16 +220,16 @@ public class PersistenciaJDBC implements InterfacePersistencia {
                 dtAdmissao.setTimeInMillis(rs.getDate("data_admissao").getTime());
                 funcionario.setData_admissao(dtAdmissao);
                 Calendar dtDemissao = Calendar.getInstance();
-                dtDemissao.setTimeInMillis(rs.getDate("data_demissao").getTime());
+                if (rs.getDate("data_demissao") != null){
+                    dtDemissao.setTimeInMillis(rs.getDate("data_demissao").getTime());
+                }
                 funcionario.setData_demissao(dtDemissao);
                 funcionario.setNumero_ctps(rs.getString("numero_ctps"));
                 funcionario.setCpf(rs.getString("cpf"));
-                rs.close();
+                //rs.close();
 
-                PreparedStatement psCursos =
-                        this.con.prepareStatement("SELECT id, cargahoraria, descricao, dt_conclusao FROM tb_curso; "
-                                + "from tb_funcionario f, tb_curso c, tb_funcionario_curso cv "
-                                + "where c.cpf=cv.pessoa_cpf and c.id=");
+
+                PreparedStatement psCursos = this.con.prepareStatement("SELECT cur.id, cur.cargahoraria, cur.descricao, f.cpf FROM tb_curso cur,tb_funcionario f, tb_funcionario_curso cf where cf.pessoa_cpf =f.cpf and cf.curso_id = cur.id;");
 
                 ResultSet rsCursos = psCursos.executeQuery();
 
@@ -388,7 +389,7 @@ public class PersistenciaJDBC implements InterfacePersistencia {
 
             PreparedStatement ps = this.con.prepareStatement("select " +
                     "id, " +
-                    "fonecedor, " +
+                    "fornecedor, " +
                     "nome," +
                     "valor " +
                     "from tb_peca " +
@@ -901,6 +902,7 @@ public class PersistenciaJDBC implements InterfacePersistencia {
         return null;
     }
 
+    //////////////////////LISTAS ///////////////////////
     @Override
     public List<Peca> listPeca() throws Exception {
 
@@ -969,24 +971,87 @@ public class PersistenciaJDBC implements InterfacePersistencia {
         return lista;
     }
 
+    ////CONTINUAR AS OUTRAS LISTAS AQUI
+
     @Override
     public List<Curso> listaDeCursos() throws Exception {
-        List<Curso> listCurso;
-        PreparedStatement ps = this.con.prepareStatement("SELECT id, cargahoraria, descricao, dt_conclusao\n" +
-                "\tFROM tb_curso;");
+        List<Curso> listCurso = null;
 
-        return null;
+        PreparedStatement ps = this.con.prepareStatement("SELECT id, cargahoraria, descricao" +
+                "\tFROM tb_curso where  id =?;");
+        ResultSet rs = ps.executeQuery();
+
+        listCurso = new ArrayList();
+
+        while(rs.next()){
+
+            Curso c = new Curso();
+            c.setId(rs.getInt("id"));
+            c.setCargahoraria(rs.getInt("cargahoraria"));
+            c.setDescricao(rs.getString("descricao"));
+
+            listCurso.add(c);
+
+        }
+
+        rs.close();
+        ps.close();
+
+        return listCurso;
     }
 
     @Override
     public List<Cargo> listaCargos() throws Exception {
         List<Cargo> listCargo;
-        PreparedStatement ps = this.con.prepareStatement("SELECT id, descricao\n" +
-                "\tFROM tb_cargo;");
 
+        PreparedStatement ps = this.con.prepareStatement(" select c.id, c.descricao,f.numero_ctps, f.data_admissao, f.data_demissao, f.cargo, f.cursos "
+                + " from tb_cargo c, tb_funcionario f where c.cpf = f.cpf order by id asc");
+
+;
+        ResultSet rs = ps.executeQuery();
+
+        listCargo = new ArrayList();
+
+        while (rs.next()) {
+            Cargo c = new Cargo();
+            c.setId(rs.getInt("id"));
+
+            c.setDescricao(rs.getString("descricao"));
+
+            listCargo.add(c);
+        }
+
+        return listCargo;
+    }
+    public  List<Cliente> listaClientes() throws Exception
+    {
+        return  null;
+    }
+
+    public List<Servico> listaOrdemServico() throws Exception{
         return null;
     }
 
+    public List<Equipe> listaEquipe() throws Exception{
+        return null;
+    }
+
+    public List<MaoObra> listaMaoObra() throws Exception{
+        return null;
+    }
+
+
+    public List<Orcamento> listaOrcamento() throws Exception{
+        return null;
+    }
+
+    public List<Pagamento> listaPagamento() throws Exception{
+        return null;
+    }
+
+    public List<Veiculo> listaVeiculo() throws Exception{
+        return null;
+    }
 
     @Override
     public void remover(Object o) throws Exception {
