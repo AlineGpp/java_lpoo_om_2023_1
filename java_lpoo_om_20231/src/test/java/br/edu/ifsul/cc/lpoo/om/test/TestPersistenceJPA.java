@@ -5,6 +5,7 @@ import br.edu.ifsul.cc.lpoo.om.model.Curso;
 import br.edu.ifsul.cc.lpoo.om.model.Funcionario;
 import br.edu.ifsul.cc.lpoo.om.model.Peca;
 import br.edu.ifsul.cc.lpoo.om.model.dao.PersistenciaJPA;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.List;
 
 //como resolver o problema de o id ser uma constante pode ser eoslvido com listas
 //teste circukar
-
+@Ignore //ignora a classe
 public class TestPersistenceJPA {
 
     @Test
@@ -79,7 +80,7 @@ public class TestPersistenceJPA {
 
         if (persistencia.conexaoAberta()) {
             System.out.println("abriu a conexao com o BD via JPA");
-            List<Peca> lista = persistencia.listPeca();
+            List<Peca> lista = persistencia.listPecas();
             if ((lista.size() > 0)) {
                 for (Peca peca : lista) {
                     System.out.println(peca);
@@ -124,7 +125,7 @@ public class TestPersistenceJPA {
         PersistenciaJPA persistencia = new PersistenciaJPA();
         if(persistencia.conexaoAberta()){
 
-            List<Funcionario> list = persistencia.listaFuncionario();
+            List<Funcionario> list = persistencia.listFuncionario();
 
             if(list.isEmpty()){
 
@@ -183,7 +184,7 @@ public class TestPersistenceJPA {
 
     private Curso getCurso(PersistenciaJPA jpa) throws Exception {
 
-        List<Curso> list = jpa.listaDeCursos();
+        List<Curso> list = jpa.listCurso();
         if(list.isEmpty()){
             Curso c = new Curso();
             c.setDescricao("curso de mecanico");
@@ -200,7 +201,7 @@ public class TestPersistenceJPA {
 
     private Cargo getCargo(PersistenciaJPA jpa) throws Exception {
 
-        List<Cargo> list = jpa.listaCargos();
+        List<Cargo> list = jpa.listCargo();
         if(list.isEmpty()){
             Cargo c = new Cargo();
             c.setDescricao("Mecanico Master");

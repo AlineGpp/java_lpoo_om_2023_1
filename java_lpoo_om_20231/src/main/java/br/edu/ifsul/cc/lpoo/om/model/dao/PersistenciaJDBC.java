@@ -445,26 +445,44 @@ public class PersistenciaJDBC implements InterfacePersistencia {
             e.setNome(rs.getString("nome"));
             e.setEspecialidades(rs.getString("especialidades"));
 
+
+            PreparedStatement psFunc = this.con.prepareStatement(" select p.cpf, p.nome, p.senha, f.cargo_id, f.numero_ctps,  f.data_admissao "
+                    + " from tb_pessoa p, tb_funcionario f where p.cpf=f.cpf order by f.data_admissao asc");
+
+           // psFunc.setInt(1, e.getId());
+
+            ResultSet rsF = psFunc.executeQuery();
+
+            List<Funcionario> listfunc = new ArrayList();
+            while(rsF.next()){
+                Funcionario f= new Funcionario();
+                Cargo c = new Cargo();
+                c.setId(rsF.getInt("cargo_id"));
+                f.setCargo(c);
+                f.setCpf(rsF.getString("cpf"));
+                f.setNome(rsF.getString("nome"));
+                f.setSenha(rsF.getString("senha"));
+                f.setNumero_ctps(rsF.getString("numero_ctps"));
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(rsF.getDate("data_admissao"));
+                f.setData_admissao(cal);
+                listfunc.add(f);
+            }
+            e.setFuncionarios(listfunc); // equipe tem uma lista de funcionarios
+            rsF.close();
             PreparedStatement ps2 =
-                    this.con.prepareStatement("select equipe_id, funcionario_cpf from tb_equipe_funcionario where equipe_id = ? ");
+                    this.con.prepareStatement("select e.nome,p.nome,p.cpf, f.cargo_id, f.data_admissao " +
+                            "from tb_equipe_funcionario ef,tb_pessoa p ,tb_funcionario f, tb_equipe e \n" +
+                            "where p.cpf = f.cpf and  ef.funcionario_cpf = p.cpf  and ef.equipe_id = ? ");
             ps2.setInt(1, e.getId());
 
             ResultSet rs2 = ps2.executeQuery();
-            List<Funcionario> listfunc = new ArrayList();
-            while(rs2.next()){
-                Funcionario f= new Funcionario();
-                Cargo c = new Cargo();
-                //c.setId();
-                f.setCargo(c);
 
-                f.setCpf(rs2.getString("funcionario_cpf"));
-                listfunc.add(f);
-            }
-            e.setFuncionarios(listfunc);
 
             rs2.close();
 
             //select equipe_id, funcionario_cpf from tb_equipe_funcionario where equipe_id = 1;
+
             //recuperar os funcionarios da equipe.
 
             listagemRetorno.add(e);
