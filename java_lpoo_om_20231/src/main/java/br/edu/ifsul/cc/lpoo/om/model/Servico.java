@@ -19,6 +19,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ *
+ * @author Prof. Telmo Jr
+ */
+
 @Entity//indica que a classe será gerenciada
 //pelo jpa/hibernate.
 @Table(name = "tb_servico")//defini o formato do 

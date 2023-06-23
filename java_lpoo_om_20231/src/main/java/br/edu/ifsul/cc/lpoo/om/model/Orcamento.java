@@ -18,6 +18,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ * @author telmo
+ */
 
 @Entity//indica que a classe será gerenciada
 //pelo jpa/hibernate.

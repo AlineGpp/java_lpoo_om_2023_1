@@ -13,6 +13,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ *
+ * @author telmo
+ */
+
 @Entity
 @Table(name = "tb_equipe")
 public class Equipe {

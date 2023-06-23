@@ -2,12 +2,23 @@
 package br.edu.ifsul.cc.lpoo.om.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
+/**
+ * @author telmo
+ */
 
 @Entity
 @Table(name = "tb_cargo")
-@NamedQueries({@NamedQuery(name="Cargo.orderbyid", query="select c from Cargo c order by c.id asc")})
+@NamedQueries({@NamedQuery(name="consulta_cargo_orderbyid", query="select c from Cargo c order by c.id asc")})
 public class Cargo implements Serializable {
     
     @Id
@@ -21,13 +32,10 @@ public class Cargo implements Serializable {
     public Cargo(){
         
     }
-
-    @Override
-    public String toString() {
-        return "Cargo{" +
-                "id=" + id +
-                ", descricao='" + descricao + '\'' +
-                '}';
+    
+    public Cargo(Integer id){
+        
+        this.id = id;
     }
 
     /**
@@ -58,5 +66,28 @@ public class Cargo implements Serializable {
         this.descricao = descricao;
     }
     
+    @Override
+    public String toString(){
+        return descricao;
+    }
+    
+    @Override
+    public boolean equals(Object o){
+
+        if(o == null){
+            return false;
+
+        }else if(!(o instanceof Cargo)){
+            return false;
+
+        }else{
+            Cargo c = (Cargo) o;
+            if (c.getId().intValue() == this.getId().intValue()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
     
 }

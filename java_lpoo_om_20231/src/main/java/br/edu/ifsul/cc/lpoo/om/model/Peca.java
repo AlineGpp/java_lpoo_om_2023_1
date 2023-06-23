@@ -1,13 +1,28 @@
 
 package br.edu.ifsul.cc.lpoo.om.model;
 
-import javax.persistence.*;
-///hql
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+/**
+ *
+ * @author telmo
+ */
 
 @Entity
 @Table(name = "tb_peca")
 @NamedQueries({@NamedQuery(name="Peca.orderbyid", query="select p from Peca p order by p.id asc")})
-public class Peca {
+public class Peca implements Serializable {
     
     @Id
     @SequenceGenerator(name = "seq_peca", sequenceName = "seq_peca_id", allocationSize = 1)
@@ -25,16 +40,6 @@ public class Peca {
     
     public Peca(){
         
-    }
-
-    @Override
-    public String toString() {
-        return "Peca{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", valor=" + valor +
-                ", fornecedor='" + fornecedor + '\'' +
-                '}';
     }
 
     /**
@@ -94,6 +99,10 @@ public class Peca {
     }
 
 
+    @Override
+    public String toString() {
+        return  fornecedor ;
+    }
     
     
 }

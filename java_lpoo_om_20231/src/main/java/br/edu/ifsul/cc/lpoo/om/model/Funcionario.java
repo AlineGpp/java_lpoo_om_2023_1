@@ -3,7 +3,23 @@ package br.edu.ifsul.cc.lpoo.om.model;
 
 import java.util.Calendar;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+/**
+ *
+ * @author telmo
+ */
 
 @Entity
 @DiscriminatorValue("F")
@@ -37,17 +53,6 @@ public class Funcionario extends Pessoa {
     
     public Funcionario(){
         
-    }
-
-    @Override
-    public String toString() {
-        return "Funcionario{" +
-                "numero_ctps='" + numero_ctps + '\'' +
-                ", data_admissao=" + data_admissao +
-                ", data_demissao=" + data_demissao +
-                ", cargo=" + cargo +
-                ", cursos=" + cursos +
-                '}';
     }
 
     /**
@@ -120,7 +125,10 @@ public class Funcionario extends Pessoa {
         this.cursos = cursos;
     }
     
-    
+    @Override
+    public String toString(){
+        return super.getCpf();
+    }
     
     
 }

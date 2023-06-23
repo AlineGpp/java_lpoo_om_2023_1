@@ -1,13 +1,29 @@
 
 package br.edu.ifsul.cc.lpoo.om.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+/**
+ *
+ * @author telmo
+ */
 
 @Entity
 @Table(name = "tb_curso")
 @NamedQueries({@NamedQuery(name="Curso.orderbyid", query="select c from Curso c order by c.id asc")})
-public class Curso {
+public class Curso implements Serializable {
     
     @Id
     @SequenceGenerator(name = "seq_curso", sequenceName = "seq_curso_id", allocationSize = 1)
@@ -17,20 +33,15 @@ public class Curso {
     @Column(nullable = false, length = 200)
     private String descricao;
     
+      
     @Column(nullable = true)
     private Integer cargahoraria;
     
+    
+    private Calendar data_conclusao;
+    
     public Curso(){
         
-    }
-
-    @Override
-    public String toString() {
-        return "Curso{" +
-                "id=" + id +
-                ", descricao='" + descricao  +
-                ", cargahoraria=" + cargahoraria +
-                '}';
     }
 
     /**
@@ -61,6 +72,8 @@ public class Curso {
         this.descricao = descricao;
     }
 
+ 
+
     /**
      * @return the cargahoraria
      */
@@ -74,6 +87,21 @@ public class Curso {
     public void setCargahoraria(Integer cargahoraria) {
         this.cargahoraria = cargahoraria;
     }
+
+    /**
+     * @return the data_conclusao
+     */
+    public Calendar getData_conclusao() {
+        return data_conclusao;
+    }
+
+    /**
+     * @param data_conclusao the data_conclusao to set
+     */
+    public void setData_conclusao(Calendar data_conclusao) {
+        this.data_conclusao = data_conclusao;
+    }
+    
     
     
 }

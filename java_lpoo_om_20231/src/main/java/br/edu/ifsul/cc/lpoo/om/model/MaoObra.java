@@ -12,6 +12,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ *
+ * @author telmo junior
+ */
 
 @Entity
 @Table(name = "tb_maoobra")

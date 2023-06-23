@@ -16,7 +16,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
+/**
+ *
+ * @author telmo
+ */
 
 @Entity
 @Table(name = "tb_pagamento")
@@ -152,6 +155,8 @@ public class Pagamento {
     public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
-
-
+    
+    
+    
+    
 }

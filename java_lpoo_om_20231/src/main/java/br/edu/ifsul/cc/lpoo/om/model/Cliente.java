@@ -10,7 +10,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-
+/**
+ *
+ * @author telmo
+ */
 
 @Entity
 @DiscriminatorValue("C")
@@ -57,6 +60,9 @@ public class Cliente extends Pessoa{
     public void setVeiculos(List<Veiculo> veiculos) {
         this.veiculos = veiculos;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return  observacoes ;
+    }
 }

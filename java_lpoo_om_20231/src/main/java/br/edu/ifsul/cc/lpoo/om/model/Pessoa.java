@@ -13,6 +13,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/**
+ *
+ * @author telmo
+ */
+
 @Entity
 @Table(name = "tb_pessoa")
 //definicao da herança e estratégia
@@ -45,14 +50,6 @@ public abstract class Pessoa implements Serializable{
     
     public Pessoa(){
         
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
     }
 
     /**
@@ -138,6 +135,21 @@ public abstract class Pessoa implements Serializable{
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
+
+    /**
+     * @return the numero
+     */
+    public String getNumero() {
+        return numero;
+    }
+
+    /**
+     * @param numero the numero to set
+     */
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+    
+    
     
 }
-
